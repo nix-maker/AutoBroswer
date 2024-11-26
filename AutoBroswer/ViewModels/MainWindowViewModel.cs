@@ -25,6 +25,7 @@ namespace AutoBroswer.ViewModels
         public void SaveTask(TaskConfig taskConfig)
         {
             // 启动任务
+
         }
 
     }
