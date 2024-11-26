@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:AutoBroswer.ViewModels"
+        mc:Ignorable="d"
+		Width="450"
+		Height="400"
+        x:Class="AutoBroswer.AppConfigWindow"
+		WindowStartupLocation="CenterScreen"
+		x:DataType="vm:AppConfigViewModel"
+		CanResize="False"
+		TransparencyLevelHint="AcrylicBlur"
+		ExtendClientAreaToDecorationsHint="True"
+        Background="Transparent"
+        Title="AppConfigWindow">
+	<Design.DataContext>
+		<vm:AppConfigViewModel/>
+	</Design.DataContext>
+
+	<StackPanel Margin="20">
+
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="Digger"
+					TintColor="Black"
+					TintOpacity="1"
+					MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<TextBlock FontSize="24" Margin="0,0,0,20">设置</TextBlock>
+		<Panel  Margin="0 5">
+			<CheckBox IsChecked="{Binding IsUseLocalBroswer}">是否启用本地浏览器</CheckBox>
+			<Button HorizontalAlignment="Right" IsEnabled="{Binding !IsDownloading}" Command="{Binding DownloadBroswerAsync}">下载浏览器</Button>
+		</Panel>
+		<StackPanel Orientation="Horizontal" Margin="0 5" Spacing="5">
+			<TextBlock VerticalAlignment="Center" IsEnabled="{Binding IsUseLocalBroswer}">本地浏览器路径:</TextBlock>
+			<TextBox  Width="200" Watermark="请选择"  Text="{Binding BroswerPath}"  IsEnabled="False"/>
+			<Button Command="{Binding OpenFileDialog}"  IsEnabled="{Binding IsUseLocalBroswer}">选择文件</Button>
+		</StackPanel>
+		<CheckBox IsChecked="{Binding !IsShowBroswer}">运行时是否显示浏览器</CheckBox>
+
+		<CheckBox IsChecked="{Binding IsRunFirstStart}">是否立即执行</CheckBox>
+
+		<Panel Margin="0 5">
+			<TextBlock VerticalAlignment="Center">间隔时间(秒)：</TextBlock>
+			<NumericUpDown Width="200" Value="{Binding WaitSeconds}" Minimum="0" Increment="1" FormatString="0"></NumericUpDown>
+		</Panel>
+	</StackPanel>
+</Window>

@@ -1,0 +1,81 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AutoBroswer.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+		Width="800"
+		Height="450"
+        x:Class="AutoBroswer.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AutoBroswer"
+		CanResize="False"
+		
+		WindowStartupLocation="CenterScreen"
+		TransparencyLevelHint="AcrylicBlur"
+		ExtendClientAreaToDecorationsHint="True"
+        Background="Transparent">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+	<Panel>
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="Digger"
+					TintColor="Black"
+					TintOpacity="1"
+					MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+
+		<Grid RowDefinitions="40,40,*,40">
+			<Panel Grid.Row="1" Margin="20,0,0,0">
+				<StackPanel Orientation="Horizontal">
+					<Button>+</Button>
+					<Button>-</Button>
+					<Button>+</Button>
+				</StackPanel>
+			</Panel>
+			<DataGrid  Grid.Row="2" Margin="20,5,20,20"
+					   ItemsSource="" Background="Gray"
+				  IsReadOnly="True"
+				  CanUserReorderColumns="True"
+				  CanUserResizeColumns="True"
+				  CanUserSortColumns="False"
+				  GridLinesVisibility="All"
+				  BorderThickness="1"
+					   BorderBrush="Gray">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="First Name"  />
+					<DataGridTextColumn Header="Last Name"   />
+
+					<DataGridTemplateColumn Header="状态">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<WrapPanel>
+									<Button>运行中</Button>
+									<Button>取消</Button>
+								</WrapPanel>
+							</DataTemplate>
+
+
+
+
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+			<StackPanel Margin="10" Orientation="Vertical" FlowDirection="RightToLeft"  Grid.Row="3">
+				<Button Command="{Binding OpenConfig}">
+					<PathIcon Height="20" Width="20" Foreground="White" Data="{StaticResource settings_regular}"></PathIcon>
+				</Button>
+			</StackPanel> 
+		</Grid>
+
+	</Panel>
+	<!--<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+
+</Window>
